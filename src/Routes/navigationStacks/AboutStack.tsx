@@ -1,15 +1,15 @@
 import React from 'react';
 import { createStackNavigator } from "@react-navigation/stack";
-import { AboutScreen } from "../screens/AboutScreen";
-import { navigatorOptions } from './Routes';
-import { DrawerIcon } from '../components/DrawerIcon';
+import { AboutScreen } from "../../screens/AboutScreen";
+import { DrawerIcon } from '../../components/DrawerIcon';
+import { TabnavigatorOptions } from '../TabNavigatorOptions';
 
 const Stack = createStackNavigator();
 
 export const AboutStack: React.FC = () => {
     return (
         <Stack.Navigator screenOptions={({navigation}) => ({
-            ...navigatorOptions,
+            ...TabnavigatorOptions,
             headerLeft: () => <DrawerIcon navigation={navigation}/>,
             headerTitle: "About us"
             

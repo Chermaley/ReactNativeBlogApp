@@ -3,7 +3,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from '@expo/vector-icons';
 import { PostStack } from './PostStack';
 import { BookedStack } from './BookedStack';
-import { THEME } from "../THEME";
+import { THEME } from "../../THEME";
 import { TabsParamList } from './types/TabsStackParams';
 
 const Tabs = createBottomTabNavigator<TabsParamList>();

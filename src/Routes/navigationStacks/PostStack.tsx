@@ -1,18 +1,18 @@
 import React from 'react';
-import { MainScreen } from "../screens/MainScreen";
+import { MainScreen } from "../../screens/MainScreen";
 import {createStackNavigator} from "@react-navigation/stack"
-import { PostScreen } from '../screens/PostScreen';
-import { navigatorOptions } from './Routes';
+import { PostScreen } from '../../screens/PostScreen';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import { AppHeaderIcon } from '../components/AppHeaderIcon';
+import { AppHeaderIcon } from '../../components/AppHeaderIcon';
 import { PostNavProps, PostStackParamList } from './types/PostStackParamList';
-import { DrawerIcon } from '../components/DrawerIcon';
+import { DrawerIcon } from '../../components/DrawerIcon';
+import { TabnavigatorOptions } from '../TabNavigatorOptions';
 
 const Stack = createStackNavigator<PostStackParamList>();
 
 export const PostStack: React.FC = () => {
     return (
-        <Stack.Navigator screenOptions={navigatorOptions}>
+        <Stack.Navigator screenOptions={TabnavigatorOptions}>
             <Stack.Screen name="Main" component={MainScreen} options={({navigation}: PostNavProps<'Main'>) => ({
                 headerTitle: 'Blog',
                 headerRight: () => {
@@ -20,7 +20,7 @@ export const PostStack: React.FC = () => {
                         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
                             <Item title="Take photo" 
                                 iconName="ios-camera" 
-                                onPress={() => navigation.navigate('Create', {})}/>
+                                onPress={() => navigation.navigate('CreateStack', {})}/>
                         </HeaderButtons>
                     )
                 },

@@ -1,8 +1,7 @@
 import React from 'react';
-import {View, Text, StyleSheet, Image, Button, Alert} from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
+import {View, Text, StyleSheet, Image, Button, Alert, ScrollView} from 'react-native';
 import { DATA } from '../data';
-import { PostNavProps } from '../Routes/types/PostStackParamList';
+import { PostNavProps } from '../Routes/navigationStacks/types/PostStackParamList';
 import { THEME } from '../THEME';
 
 export const PostScreen = ({route,navigation} : PostNavProps<"Post">) => {

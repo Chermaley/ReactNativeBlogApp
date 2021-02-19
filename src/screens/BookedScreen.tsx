@@ -1,7 +1,7 @@
 import React from 'react';
 import { PostList } from '../components/PostList';
 import { DATA } from '../data';
-import { BookedNavProps } from '../Routes/types/BookedStackParams';
+import { BookedNavProps } from '../Routes/navigationStacks/types/BookedStackParams';
 
 export const BookedScreen = ({navigation}: BookedNavProps<"Booked">) => {
     
@@ -10,8 +10,4 @@ export const BookedScreen = ({navigation}: BookedNavProps<"Booked">) => {
     }
 
     return <PostList onOpen={openPostHandler} DATA={DATA.filter(p => p.booked)}/>
-}
-
-BookedScreen.navigationOptions = {
-    
 }
