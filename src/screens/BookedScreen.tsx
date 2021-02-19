@@ -1,11 +1,9 @@
 import React from 'react';
-import {HeaderButtons, Item} from 'react-navigation-header-buttons';
-import { NavigationStackScreenComponent } from 'react-navigation-stack';
-import { AppHeaderIcon } from '../components/AppHeaderIcon';
 import { PostList } from '../components/PostList';
 import { DATA } from '../data';
+import { BookedNavProps } from '../Routes/types/BookedStackParams';
 
-export const BookedScreen: NavigationStackScreenComponent = ({navigation}) => {
+export const BookedScreen = ({navigation}: BookedNavProps<"Booked">) => {
     
     const openPostHandler = (post: any) => {
         navigation.navigate('Post', {postId: post.id, booked: post.booked})
@@ -15,14 +13,5 @@ export const BookedScreen: NavigationStackScreenComponent = ({navigation}) => {
 }
 
 BookedScreen.navigationOptions = {
-    headerTitle: 'Favorites',
-    headerLeft: () => {
-        return (
-            <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-                <Item title="Take photo" 
-                      iconName="ios-menu" 
-                      onPress={() => console.log('press photo')}/>
-            </HeaderButtons>
-        )
-    }
+    
 }

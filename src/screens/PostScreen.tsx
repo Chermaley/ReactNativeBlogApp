@@ -1,14 +1,12 @@
 import React from 'react';
 import {View, Text, StyleSheet, Image, Button, Alert} from 'react-native';
 import { ScrollView } from 'react-native-gesture-handler';
-import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import { NavigationStackScreenComponent } from 'react-navigation-stack';
-import { AppHeaderIcon } from '../components/AppHeaderIcon';
 import { DATA } from '../data';
+import { PostNavProps } from '../Routes/types/PostStackParamList';
 import { THEME } from '../THEME';
 
-export const PostScreen: NavigationStackScreenComponent = ({navigation}) => {
-    const postId = navigation.getParam('postId')
+export const PostScreen = ({route,navigation} : PostNavProps<"Post">) => {
+    const postId = route.params.postId;
     
     const post = DATA.find(p => p.id === postId);
 
@@ -34,24 +32,6 @@ export const PostScreen: NavigationStackScreenComponent = ({navigation}) => {
             <Button onPress={removeHandler} title={'Delete'} color={THEME.DANGER_COLOR}/>
         </ScrollView>
     )
-}
-
-PostScreen.navigationOptions = ({navigation}) => {
-    const iconName = navigation.getParam('booked') ? 'ios-star' : 'ios-star-outline'
-
-    const postId = navigation.getParam('postId')
-    return {
-        headerTitle: `Post ${postId}`,
-        headerRight: () => {
-            return (
-                <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
-                    <Item title="Take photo" 
-                          iconName={iconName}
-                          onPress={() => console.log('press photo')}/>
-                </HeaderButtons>
-            )
-        },
-    }
 }
 
 const styles = StyleSheet.create({

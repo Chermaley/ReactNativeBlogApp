@@ -1,0 +1,50 @@
+import React from 'react';
+import { MainScreen } from "../screens/MainScreen";
+import {createStackNavigator} from "@react-navigation/stack"
+import { PostScreen } from '../screens/PostScreen';
+import { navigatorOptions } from './Routes';
+import { HeaderButtons, Item } from 'react-navigation-header-buttons';
+import { AppHeaderIcon } from '../components/AppHeaderIcon';
+import { PostStackParamList } from './types/PostStackParamList';
+import { DrawerIcon } from '../components/DrawerIcon';
+
+const Stack = createStackNavigator<PostStackParamList>();
+
+export const PostStack: React.FC = () => {
+    return (
+        <Stack.Navigator screenOptions={navigatorOptions}>
+            <Stack.Screen name="Main" component={MainScreen} options={({navigation}) => ({
+                headerTitle: 'Blog',
+                headerRight: () => {
+                    return (
+                        <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+                            <Item title="Take photo" 
+                                iconName="ios-camera" 
+                                onPress={() => console.log('press photo')}/>
+                        </HeaderButtons>
+                    )
+                },
+                headerLeft: () => <DrawerIcon navigation={navigation}/>
+            })}/>
+
+            <Stack.Screen name="Post" component={PostScreen} options={({route}) => {
+                    const iconName = route.params.booked ? 'ios-star' : 'ios-star-outline'
+
+                    const postId = route.params.postId
+
+                    return {
+                        headerTitle: `Post ${postId}`,
+                        headerRight: () => {
+                            return (
+                                <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
+                                    <Item title="Favorites" 
+                                        iconName={iconName}
+                                        onPress={() => console.log('OOOO')}/>
+                                </HeaderButtons>
+                            )
+                        },
+                    }
+            }}/>
+        </Stack.Navigator>
+    )
+}

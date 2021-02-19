@@ -1,7 +1,7 @@
 import React from 'react';
 import AppLoading from 'expo-app-loading';
 import { bootstrap } from './src/bootstrap';
-import { AppNavigation } from './src/navigation/AppNavigation';
+import { Routes } from './src/Routes/Routes';
 
 const App: React.FC = () => {
   const [isReady, setIsReady] = React.useState(false);
@@ -12,7 +12,7 @@ const App: React.FC = () => {
                        startAsync={bootstrap}/>
   } 
 
-  return <AppNavigation />
+  return <Routes />
 }
 
 export default App;
