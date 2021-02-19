@@ -9,7 +9,7 @@ import { DrawerIcon } from '../components/DrawerIcon';
 const Stack = createStackNavigator<BookedStackParamList>();
 
 
-export const BookedStack = () => {
+export const BookedStack: React.FC = () => {
     return (
         <Stack.Navigator screenOptions={navigatorOptions}>
             <Stack.Screen name="Booked" component={BookedScreen} options={({navigation}) => ({

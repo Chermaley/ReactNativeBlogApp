@@ -1,11 +1,9 @@
-import { DrawerNavigationProp } from '@react-navigation/drawer';
 import React from 'react';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
-import { PostStackParamList } from '../Routes/types/PostStackParamList';
 import { AppHeaderIcon } from './AppHeaderIcon';
 
 type DrawerIconProps = {
-    navigation: DrawerNavigationProp<PostStackParamList>
+    navigation: any
 }
 
 export const DrawerIcon: React.FC<DrawerIconProps> = ({navigation}) => {

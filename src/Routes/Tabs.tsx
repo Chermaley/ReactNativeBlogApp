@@ -4,10 +4,11 @@ import { Ionicons } from '@expo/vector-icons';
 import { PostStack } from './PostStack';
 import { BookedStack } from './BookedStack';
 import { THEME } from "../THEME";
+import { TabsParamList } from './types/TabsStackParams';
 
-const Tabs = createBottomTabNavigator();
+const Tabs = createBottomTabNavigator<TabsParamList>();
 
-export const TabsNavigator = () => {
+export const TabsNavigator: React.FC = () => {
     return( 
         <Tabs.Navigator screenOptions={({route}) => ({
             tabBarIcon: info => {

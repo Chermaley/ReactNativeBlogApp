@@ -5,7 +5,7 @@ import { PostScreen } from '../screens/PostScreen';
 import { navigatorOptions } from './Routes';
 import { HeaderButtons, Item } from 'react-navigation-header-buttons';
 import { AppHeaderIcon } from '../components/AppHeaderIcon';
-import { PostStackParamList } from './types/PostStackParamList';
+import { PostNavProps, PostStackParamList } from './types/PostStackParamList';
 import { DrawerIcon } from '../components/DrawerIcon';
 
 const Stack = createStackNavigator<PostStackParamList>();
@@ -13,21 +13,21 @@ const Stack = createStackNavigator<PostStackParamList>();
 export const PostStack: React.FC = () => {
     return (
         <Stack.Navigator screenOptions={navigatorOptions}>
-            <Stack.Screen name="Main" component={MainScreen} options={({navigation}) => ({
+            <Stack.Screen name="Main" component={MainScreen} options={({navigation}: PostNavProps<'Main'>) => ({
                 headerTitle: 'Blog',
                 headerRight: () => {
                     return (
                         <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
                             <Item title="Take photo" 
                                 iconName="ios-camera" 
-                                onPress={() => console.log('press photo')}/>
+                                onPress={() => navigation.navigate('Create', {})}/>
                         </HeaderButtons>
                     )
                 },
                 headerLeft: () => <DrawerIcon navigation={navigation}/>
             })}/>
 
-            <Stack.Screen name="Post" component={PostScreen} options={({route}) => {
+            <Stack.Screen name="Post" component={PostScreen} options={({route}: PostNavProps<'Post'>) => {
                     const iconName = route.params.booked ? 'ios-star' : 'ios-star-outline'
 
                     const postId = route.params.postId
