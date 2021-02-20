@@ -1,8 +1,9 @@
 import { StackNavigationProp } from '@react-navigation/stack';
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { Text, StyleSheet, Image, Button, ScrollView, Keyboard} from 'react-native';
 import { TextInput, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { useDispatch } from 'react-redux';
+import { PhotoPicker } from '../components/PhotoPicker';
 import { TabsParamList } from '../Routes/navigationStacks/types/TabsStackParams';
 import { actions, PostType } from '../store/PostReducer';
 import { THEME } from '../THEME';
@@ -16,23 +17,26 @@ type CreateScreenPopsType = {
 
 export const CreateScreen: React.FC<CreateScreenPopsType> = ({navigation}) => {
     const [text, setText] = useState('')
+    const imgRef = useRef('')
 
     const dispatch = useDispatch()
 
 
     const saveHandler = () => {
-        if (text) {
-            const post: PostType = {
-                id: Date.now().toString(),
-                img: 'https://cdn.londonandpartners.com/visit/general-london/areas/river/76709-640x360-houses-of-parliament-and-london-eye-on-thames-from-above-640.jpg',
-                text,
-                booked: false,
-                date: new Date().toJSON(),
-            }
-            setText('')
-            dispatch(actions.addPost(post))
-            navigation.navigate('AllPostStack')
+        const post: PostType = {
+            id: Date.now().toString(),
+            img: imgRef.current,
+            text,
+            booked: false,
+            date: new Date().toJSON(),
         }
+        setText('')
+        dispatch(actions.addPost(post))
+        navigation.navigate('AllPostStack')
+    }
+
+    const photoPickHandler = (uri: string) => {
+        imgRef.current = uri
     }
 
     return (
@@ -45,10 +49,8 @@ export const CreateScreen: React.FC<CreateScreenPopsType> = ({navigation}) => {
                     onChangeText={setText}
                     placeholder={'Input post text'}
                     style={styles.textarea}/>
-                <Image 
-                    style={{width: '100%', height: 200, marginBottom: 40}}
-                    source={{uri: 'https://cdn.londonandpartners.com/visit/general-london/areas/river/76709-640x360-houses-of-parliament-and-london-eye-on-thames-from-above-640.jpg'}}/>    
-                <Button title="Create post" color={THEME.MAIN_COLOR} onPress={saveHandler}/>
+                <PhotoPicker onPick={photoPickHandler}/>
+                <Button disabled={!text} title="Create post" color={THEME.MAIN_COLOR} onPress={saveHandler}/>
             </TouchableWithoutFeedback>
         </ScrollView>
     )

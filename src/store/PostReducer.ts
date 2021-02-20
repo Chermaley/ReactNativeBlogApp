@@ -1,4 +1,3 @@
-import { DATA } from "../data"
 import { InferActionsTypes } from "./types"
 
 export type PostType = {
@@ -58,7 +57,7 @@ export const postReducer = (state = initialState, action: ActionsType): InitialS
 }
 
 export const actions = {
-    loadPost: () => ({type: "LOAD_POST", payload: DATA} as const),
+    loadPost: () => ({type: "LOAD_POST", payload: []} as const),
     toggleBooked: (id: string) => ({type: "TOGGLE_BOOKED", payload: id} as const),
     deletePost: (id: string) => ({type: 'DELETE_POST', payload: id} as const),
     addPost: (post: PostType) => ({type: 'ADD_POST', payload: post} as const)

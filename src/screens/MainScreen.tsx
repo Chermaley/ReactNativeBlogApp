@@ -16,7 +16,7 @@ export const MainScreen = ({navigation}: PostNavProps<"Main">) => {
     const posts = useSelector((state: AppStateType) => state.post.allPosts)
 
     const openPostHandler = (post: PostType) => {
-        navigation.navigate('AllPostStack', {postId: post.id, booked: post.booked})
+        navigation.navigate('Post', {postId: post.id, booked: post.booked})
     }
     
     return <PostList DATA={posts} onOpen={openPostHandler}/>
