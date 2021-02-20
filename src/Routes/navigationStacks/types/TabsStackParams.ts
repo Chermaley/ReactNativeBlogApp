@@ -1,9 +1,9 @@
 import { RouteProp } from "@react-navigation/native"
-import { StackNavigationProp } from "react-navigation-stack/lib/typescript/src/vendor/types"
+import { StackNavigationProp } from "@react-navigation/stack"
 
 export type TabsParamList = {
-    PostStack: undefined,
-    BookedStack: undefined
+    AllPostStack: undefined,
+    BookedPostStack: undefined
 }
 
 export type TabsNavProps<T extends keyof TabsParamList> = {

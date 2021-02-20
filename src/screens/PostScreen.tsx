@@ -1,13 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {View, Text, StyleSheet, Image, Button, Alert, ScrollView} from 'react-native';
-import { DATA } from '../data';
+import { useDispatch, useSelector } from 'react-redux';
 import { PostNavProps } from '../Routes/navigationStacks/types/PostStackParamList';
+import { actions } from '../store/PostReducer';
+import { AppStateType } from '../store/types';
 import { THEME } from '../THEME';
 
-export const PostScreen = ({route,navigation} : PostNavProps<"Post">) => {
+export const PostScreen = ({route, navigation} : PostNavProps<"Post">) => {
+    const dispatch = useDispatch();
     const postId = route.params.postId;
-    
-    const post = DATA.find(p => p.id === postId);
+    const booked = useSelector((state: AppStateType) => state.post.bookedPosts.some(post => post.id === postId))
+    const post = useSelector((state: AppStateType) => state.post.allPosts).find(p => p.id === postId);
+
+    useEffect(() => {
+        if (post) {
+            navigation.setParams({booked})
+        }
+    }, [booked])
 
     const removeHandler = () => {
         Alert.alert('Deleting post',
@@ -17,10 +26,16 @@ export const PostScreen = ({route,navigation} : PostNavProps<"Post">) => {
             text: 'Cancel',
             style: 'cancel'
           },
-          { text: 'Delete', onPress: () => console.log('OK Pressed'), style: 'destructive'}
+          { text: 'Delete', 
+          onPress() {
+              dispatch(actions.deletePost(postId))
+              navigation.navigate('Main')
+          }, style: 'destructive'}
         ],
         { cancelable: false })
     }
+
+    if (!post) return null
 
     return (
         <ScrollView>

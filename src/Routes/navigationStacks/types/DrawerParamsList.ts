@@ -1,5 +1,6 @@
 import { RouteProp } from "@react-navigation/native"
-import { StackNavigationProp } from "react-navigation-stack/lib/typescript/src/vendor/types"
+import { StackNavigationProp } from "@react-navigation/stack"
+
 
 export type DrawerParamsList = {
     Tabs: undefined,

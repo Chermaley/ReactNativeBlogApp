@@ -14,9 +14,9 @@ export const TabsNavigator: React.FC = () => {
             tabBarIcon: info => {
                 let iconName: any
 
-                if (route.name === 'PostStack') {
+                if (route.name === 'AllPostStack') {
                     iconName = 'ios-albums'
-                } else if (route.name === 'BookedStack') {
+                } else if (route.name === 'BookedPostStack') {
                     iconName = 'ios-star'
                 }
 
@@ -25,10 +25,10 @@ export const TabsNavigator: React.FC = () => {
         })} tabBarOptions={{
             activeTintColor: THEME.MAIN_COLOR
         }}>
-            <Tabs.Screen name="PostStack" component={PostStack} options={{
+            <Tabs.Screen name="AllPostStack" component={PostStack} options={{
                 tabBarLabel: "All"
             }}/>
-            <Tabs.Screen name="BookedStack" component={BookedStack} options={{
+            <Tabs.Screen name="BookedPostStack" component={BookedStack} options={{
                 tabBarLabel: "Favorites"
             }}/>
         </Tabs.Navigator>

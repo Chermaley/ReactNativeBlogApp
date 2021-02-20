@@ -7,10 +7,14 @@ import { AppHeaderIcon } from '../../components/AppHeaderIcon';
 import { PostNavProps, PostStackParamList } from './types/PostStackParamList';
 import { DrawerIcon } from '../../components/DrawerIcon';
 import { TabnavigatorOptions } from '../TabNavigatorOptions';
+import { useDispatch } from 'react-redux';
+import { actions } from '../../store/PostReducer';
 
 const Stack = createStackNavigator<PostStackParamList>();
 
 export const PostStack: React.FC = () => {
+    const dispatch = useDispatch();
+    
     return (
         <Stack.Navigator screenOptions={TabnavigatorOptions}>
             <Stack.Screen name="Main" component={MainScreen} options={({navigation}: PostNavProps<'Main'>) => ({
@@ -29,9 +33,7 @@ export const PostStack: React.FC = () => {
 
             <Stack.Screen name="Post" component={PostScreen} options={({route}: PostNavProps<'Post'>) => {
                     const iconName = route.params.booked ? 'ios-star' : 'ios-star-outline'
-
                     const postId = route.params.postId
-
                     return {
                         headerTitle: `Post ${postId}`,
                         headerRight: () => {
@@ -39,7 +41,7 @@ export const PostStack: React.FC = () => {
                                 <HeaderButtons HeaderButtonComponent={AppHeaderIcon}>
                                     <Item title="Favorites" 
                                         iconName={iconName}
-                                        onPress={() => console.log('OOOO')}/>
+                                        onPress={() => dispatch(actions.toggleBooked(route.params.postId))}/>
                                 </HeaderButtons>
                             )
                         },
